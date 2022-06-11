@@ -2,6 +2,6 @@ FROM anapsix/alpine-java
 
 # Maintainer 
 EXPOSE 8080
-
-COPY target/* .
+WORKDIR webapps 
+COPY target/*.jar .
 CMD ["java", "-jar","*.jar"]
