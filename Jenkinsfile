@@ -17,18 +17,10 @@
                 sh 'mvn clean package' 
             }
         }
-     stage('docker image') {
-      
-      steps {
-       sh ' ls'
-      
-      
-        }
-       
+     
         
      
-         
-      }
+    
      }
     
 
