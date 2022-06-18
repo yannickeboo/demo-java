@@ -14,7 +14,7 @@
               docker { image 'docker.io/library/maven:3-openjdk-18-slim' }
           }
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                sh 'mvn clean package' 
             }
         }
      stage('docker image') {
