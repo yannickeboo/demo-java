@@ -1,5 +1,5 @@
- pipeline {
- 
+  pipeline {
+
  
   agent any
    
@@ -11,24 +11,35 @@
           
         stage('Build') { 
             agent { 
-              docker { image 'docker.io/library/maven:3-openjdk-18-slim' }
+              docker { image 'docker.io/library/maven:latest' }
           }
             steps {
+                
                 sh 'mvn clean package' 
             }
+            
         }
-     stage('Test') { 
-            agent { 
-              docker { image 'docker.io/library/maven:3-openjdk-18-slim' }
-          }
-            steps {
-                sh '/kaniko/executor --dockerfile Dockerfile . --insecure --skip-tls-verify --cache=true --destination= yannickeboo:${env.BUILD_ID}' 
-            }
-        }
-    }  
+     stage('docker image') {
+      
+      
+      steps {
+       
+       
+       withDockerRegistry([ credentialsId: "Docker_hub", url: "https://index.docker.io/v1/" ]) {
+       
+       sh 'pwd && ls'
+       sh  'docker build  -t $IMAGE_NAME:app1-$VERSION .'
+       sh 'docker tag $IMAGE_NAME:app1-$VERSION $IMAGE_NAME:$VERSION'
+       sh 'docker push $IMAGE_NAME:app1-$VERSION'
+       sh 'docker push $IMAGE_NAME:$VERSION'
+        
+       
+       }
+       
+        
      
-    
+         
+      }
      }
-    
-
-
+    }
+}
