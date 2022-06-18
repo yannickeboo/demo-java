@@ -22,7 +22,7 @@
               docker { image 'docker.io/library/maven:3-openjdk-18-slim' }
           }
             steps {
-                sh 'ls' 
+                sh '/kaniko/executor --dockerfile `pwd`/Dockerfile `pwd` --insecure --skip-tls-verify --cache=true --destination= yannickeboo:${env.BUILD_ID}' 
             }
         }
     }  
