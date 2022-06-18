@@ -20,13 +20,9 @@
      stage('docker image') {
       
       steps {
-       
+       sh ' ls'
       
-       sh '''
-       - | 
-         ls 
-       - pwd
-        '''
+      
         }
        
         
