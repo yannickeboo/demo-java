@@ -22,7 +22,7 @@
               docker { image 'docker.io/library/maven:3-openjdk-18-slim' }
           }
             steps {
-                sh 'mvn clean package' 
+                sh 'ls' 
             }
         }
     }  
