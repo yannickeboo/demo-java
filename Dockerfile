@@ -1,4 +1,4 @@
-FROM anapsix/alpine-java 
+FROM openjdk 
 
 # Maintainer 
 EXPOSE 8080
